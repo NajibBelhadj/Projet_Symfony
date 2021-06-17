@@ -1,0 +1,106 @@
+{% extends 'offreBase.html.twig' %}
+
+{% block title %}Categorie{% endblock %}
+
+{% block body %}
+
+<div class="wrapper">
+  <!-- Content Wrapper. Contains page content -->
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Votre Offre</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              
+              <li class="breadcrumb-item active">recruteur/categorie</li>
+              
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="">table des offre </h5>
+                <a class=" card-title fancy-button bg-gradient2 float-right" style="margin-top: -30px; color: #007bff;" href="/recruteur/categorie/new"
+                        style="color: #0C893A ;">
+                        <span>
+                        <i class="fa fa-plus modal-title"></i><b style="cursor: pointer;">Ajouter Categorie</b></span></a>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="example1" class="table table-bordered table-hover">
+                  <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>Categorie</th>
+                    <th>Actions</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  {% for offre in categorie %}
+                    <tr>
+                        <td>{{ offre.id }}</td>
+                        <td>{{ offre.name }}</td>
+                        <td>
+                            <a class="delete ml-2" href="/recruteur/categorie/edit/{{offre.id}}"  style="color: #007bff;"><i style="cursor: pointer;" class="material-icons">&#xE254;</i></a>
+                            <a class="delete ml-2" href="/recruteur/categorie/delete/{{offre.id}}"  style="color: #E34724;"><i style="cursor: pointer;" class="material-icons">&#xE872;</i></a>     
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td class="text-center" colspan="10">no records found</td>
+                    </tr>
+                {% endfor %}
+                  </tbody>
+                  <tfoot>
+                  <tr>
+                    <th>Id</th>
+                    <th>Categorie</th>
+                    <th>Actions</th>
+                  </tr>
+                  </tfoot>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
+
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+          {% for message in app.flashes('suprimée') %}
+        <center><div class="col-9 alert alert-success">
+            {{ message }}
+        </div></center>
+    {% endfor %}
+      <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  
+  <!-- /.content-wrapper -->
+
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+
+
+{% endblock %}

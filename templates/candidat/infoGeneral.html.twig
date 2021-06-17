@@ -1,0 +1,76 @@
+{% extends 'baseHome.html.twig' %}
+
+{% block title %}new Offre{% endblock %}
+
+{% block body %}
+        <div>
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" style="margin-top: 10px">Ajouter un Offre
+                  </h5>
+                </div>
+                <div class="modal-body">
+                  <div class="column" id="main" >
+                    <form action="{{ path("modifierinfo" , {'id': app.user.id })}}" enctype="multipart/form-data" method="post">
+                        <div class="form-group col-12">
+                            <label for="nom">Nom</label>
+                            <input type="text" name="nom" class="form-control" placeholder="Nom" value="{{user.nom}}" required>
+                        </div>
+                        <div class="form-group col-12">
+                            <label for="nom">Prènom</label>
+                            <input type="text" name="prenom" class="form-control" value="{{user.prenom}}" placeholder="Prénom" required>
+                        </div>
+                        <div class="form-group col-12">
+                            <label for="nom">Adresse</label>
+                            <input type="text" name="adresse" class="form-control" value="{{user.candidat.adresse}}" placeholder="Adresse" required>
+                        </div>
+                        <div class="form-group col-12">
+                            <label for="nom">Telephone</label>
+                            <input type="text" name="tel" class="form-control" value="{{user.candidat.telephone}}" placeholder="Telephone" required>
+                        </div>
+                        <div class="form-group col-12">
+                            <label for="nom">Description</label>
+                            <textarea  class="form-control" name="description" rows="4" cols="50"  required>{{user.candidat.quijesuis}}</textarea>
+                        </div>
+                        <div class="form-group col-12">
+                            <label for="nom">Facebook</label>
+                            <input type="text" name="facebook" class="form-control" value="{{user.candidat.Facebook}}" placeholder="Facebook" >
+                        </div>
+                        <div class="form-group col-12">
+                            <label for="nom">Twitter</label>
+                            <input type="text" name="twitter" class="form-control" value="{{user.candidat.twitter}}" placeholder="Twitter" >
+                        </div>
+                        <div class="form-group col-12">
+                            <label for="nom">Linkedin</label>
+                            <input type="text" name="link" class="form-control" placeholder="Linkedin" value="{{user.candidat.linkedin}}">
+                        </div>
+                        <div class="form-group col-12">
+                            <label for="nom">Image</label>
+                            <input id="avatar" type="file" name="img" class="form-control" placeholder="Linkedin">
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn" style="background-color :#007bff; color: beige;">Modifier</button>
+                        </div>
+                    </form>
+                    {% for message in app.flashes('success') %}
+                        <div class="alert alert-success"  >
+                        {{ message }}
+                        </div>
+                    {% endfor %}
+                    {% for message in app.flashes('error') %}
+                        <div class="alert alert-danger"  >
+                           {{ message }}
+                        </div>
+                    {% endfor %}
+                  </div>
+
+                </div>
+                <div class="modal-footer">
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+{% endblock %}

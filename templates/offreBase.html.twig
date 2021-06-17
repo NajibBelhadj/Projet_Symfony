@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {# Run `composer require symfony/webpack-encore-bundle`
+           and uncomment the following Encore helpers to start using Symfony UX #}
+        {% block stylesheets %}
+            {#{{ encore_entry_link_tags('app') }}#}
+            <link rel="preconnect" href="https://fonts.gstatic.com">
+            <link href="https://fonts.googleapis.com/css2?family=Akaya+Telivigala&display=swap" rel="stylesheet">
+            <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
+            <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans">
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
+
+            <link rel="stylesheet" href={{ asset("header.css") }}>
+
+
+              <link rel="stylesheet" href={{ asset("plugins/fontawesome-free/css/all.min.css") }}>
+                <!-- Ionicons -->
+                <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+                <!-- DataTables -->
+                <link rel="stylesheet" href={{ asset("plugins/datatables-bs4/css/dataTables.bootstrap4.min.css") }}>
+                <link rel="stylesheet" href={{ asset("plugins/datatables-responsive/css/responsive.bootstrap4.min.css") }}>
+                <!-- Theme style -->
+                <link rel="stylesheet" href={{ asset("dist/css/adminlte.min.css") }}>
+                <!-- Google Font: Source Sans Pro -->
+                <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+        {% endblock %}
+
+        {% block javascripts %}
+            {#{{ encore_entry_script_tags('app') }}#}
+        {% endblock %}
+    </head>
+    <body>
+    <section class="main body">
+        <!--navigation-->
+        <nav>
+            <!--logo-->
+
+            <label class="menu-icon" for="menu-btn">
+                <span class="nav-icon"></span>
+            </label>
+           
+            <ul class="menu">
+                <li><a [routerLink]='[""]'>Acceuil</a></li>
+                <li><a href="/recruteur/categorie/all" >Categorie</a></li>
+                <li><a href="/recruteur/offre">offre d'emploi</a></li>
+                <li><a href="/all/candidats">Candidats</a></li>
+                <li><a href="/logout">logout</a></li>
+            </ul>
+        </nav>
+        <!--main-content-->
+        <div >
+            <router-outlet></router-outlet>
+             <!--text-->
+        </div>
+    </section>
+        {% block body %}{% endblock %}
+
+
+
+        <script src={{ asset("plugins/jquery/jquery.min.js") }}></script>
+<!-- Bootstrap 4 -->
+<script src={{ asset("plugins/bootstrap/js/bootstrap.bundle.min.js") }}></script>
+<!-- DataTables -->
+<script src={{ asset("plugins/datatables/jquery.dataTables.min.js") }}></script>
+<script src={{ asset("plugins/datatables-bs4/js/dataTables.bootstrap4.min.js") }}></script>
+<script src={{ asset("plugins/datatables-responsive/js/dataTables.responsive.min.js") }}></script>
+<script src={{ asset("plugins/datatables-responsive/js/responsive.bootstrap4.min.js") }}></script>
+<!-- AdminLTE App -->
+<script src={{ asset("dist/js/adminlte.min.js") }}></script>
+<!-- AdminLTE for demo purposes -->
+<script src={{ asset("dist/js/demo.js") }}></script>
+<!-- page script -->
+<script>
+  $(function () {
+    $("#example1").DataTable({
+      "responsive": true,
+      "autoWidth": false,
+    });
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+  });
+</script>
+    </body>
+</html>

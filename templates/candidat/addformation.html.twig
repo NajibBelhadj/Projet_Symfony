@@ -1,0 +1,53 @@
+{% extends 'baseHome.html.twig' %}
+
+{% block title %}new Offre{% endblock %}
+
+{% block body %}
+        <div>
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" style="margin-top: 10px">Ajouter un Offre
+                  </h5>
+                </div>
+                <div class="modal-body">
+                  <div class="column" id="main" >
+                    <form action="{{ path("new_formation")}}" enctype="multipart/form-data" method="post">
+                        <div class="form-group col-12">
+                            <label for="nom">Ecole ou Universitée</label>
+                            <input type="text" name="ecole" class="form-control" placeholder="Ecole" required>
+                        </div>
+    
+                        <div class="form-group col-12">
+                            <label for="nom">Diplome</label>
+                            <input type="text" name="diplome" class="form-control" placeholder="Diplome" required>
+                        </div>
+                        <div class="form-group col-12">
+                            <label for="nom">Année</label>
+                            <input type="text" name="annee" class="form-control" placeholder="Année" >
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn" style="background-color :#007bff; color: beige;">Ajouter</button>
+                        </div>
+                    </form>
+                    {% for message in app.flashes('success') %}
+                        <div class="alert alert-success"  >
+                        {{ message }}
+                        </div>
+                    {% endfor %}
+                    {% for message in app.flashes('error') %}
+                        <div class="alert alert-danger"  >
+                           {{ message }}
+                        </div>
+                    {% endfor %}
+                  </div>
+
+                </div>
+                <div class="modal-footer">
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+{% endblock %}

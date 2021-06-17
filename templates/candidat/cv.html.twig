@@ -1,0 +1,157 @@
+{% extends 'baseCV.html.twig' %}
+
+
+{% block title %}Hello candidatController!{% endblock %}
+
+{% block body %}
+<header>
+        <h1>CV de {{ user.nom }} {{ user.prenom }}</h1>
+    </header>
+    
+    <section>
+        {% if is_granted("ROLE_CANDIDAT") %}
+            <a class="delete mp-5 ml-2" href="/candidat/modifierinfo/{{user.id}}"  style="color: #4caf50; font-size:32px; margin-top:2%"><i style="cursor: pointer;" class="fas fa-edit"></i></a>
+        {% endif %}
+        <div class="photo">
+            <img src="/uploads{{ asset(user.candidat.image) }}" alt="Ma photo de profil">
+        </div>
+        <div class="prez">
+            <h2>Qui suis-je ?</h2>
+            <p>{{ user.candidat.quijesuis }}</p>
+            <a href="#" download>Télécharger mon CV</a>
+        </div>
+        <div class="contact">
+            <h2>Informations de contact</h2>
+            <div class="contact-flex">
+                <p>Nom : </p>
+                <p>{{ user.nom }} {{ user.prenom }}</p>
+            </div>
+            <div class="contact-flex">
+                <p>Adresse : {{ user.candidat.adresse}}</p>
+                <p></p>
+            </div>
+            <div class="contact-flex">
+                <p>Téléphone :</p>
+                <p>{{ user.candidat.telephone}}</p>
+            </div>
+            <div class="contact-flex">
+                <p>Mail : </p>
+                <p><a href="mailto:pierre.giraud@edhec.com">{{ user.email }}</a></p>
+            </div>
+
+            <div class="social">
+                <a href="{{ user.candidat.facebook }}"><img src="https://www.pierre-giraud.com/wp-content/uploads/2019/07/fb.png" alt="Logo Fb"></a>
+                <a href="{{ user.candidat.twitter}}"><img src="https://www.pierre-giraud.com/wp-content/uploads/2019/07/tw.png" alt="Logo Tw"></a>
+                <a href="{{ user.candidat.linkedin }}"><img src="https://www.pierre-giraud.com/wp-content/uploads/2019/07/lk.png" alt="Logo Lk"></a>
+            </div>
+        </div>
+    </section>
+    
+    <section>
+        <h2>Expériences professionnelles</h2>
+        {% if is_granted("ROLE_CANDIDAT") %}
+            <a class="delete mp-5 ml-2" href="/candidat/ajouterexperience/"  style="color: #4caf50; font-size:24px; margin-top:2%"><i style="cursor: pointer;" class="fas fa-plus"></i></a>
+        {% endif %}
+        {% for experience in user.candidat.experiences %}
+            <div class="exp">
+                <div class="exp-info">
+                    <h3>{{ experience.post }}</h3>
+                    <h4>{{ experience.societe }}</h4>
+                    <h4>{{ experience.date }}</h4>
+                </div>
+                <div class="exp-desc">
+                    <p>{{ experience.description }}</p>
+                </div>
+            </div>
+        {% if is_granted("ROLE_CANDIDAT") %}
+            <a class="delete mp-5 ml-2" href="/candidat/modifierexperience/{{experience.id}}"  style="color: #4caf50; font-size:24px; margin-top:2%"><i style="cursor: pointer;" class="fas fa-edit"></i></a>
+            &nbsp
+            <a class="delete mp-5 ml-2" href="/candidat/deleteexperience/{{experience.id}}"  style="color: #4caf50; font-size:24px; margin-top:2%"><i style="cursor: pointer;" class="fas fa-trash"></i></a>
+        
+        {% endif %}
+        {% endfor %}
+    </section>
+    
+    <section>
+        <h2>Formation</h2>
+        {% if is_granted("ROLE_CANDIDAT") %}
+            <a class="delete mp-5 ml-2" href="/candidat/ajouterformation/"  style="color: #4caf50; font-size:24px; margin-top:2%"><i style="cursor: pointer;" class="fas fa-plus"></i></a>
+        {% endif %}
+        {% for formation in user.candidat.formations %}
+            <div class="exp">
+                <div class="exp-logo">
+                    <a href="#"><img src="https://www.pierre-giraud.com/wp-content/uploads/2019/07/dd.png" alt="Logo Dumont"></a>
+                </div>
+                <div class="exp-info">
+                    <h3>{{ formation.ecole }}</h3>
+                    <h4>{{ formation.annee }}</h4>
+                </div>
+                <div class="exp-desc">
+                    <p>{{ formation.diplome }}</p>
+                </div>
+            </div>
+        {% if is_granted("ROLE_CANDIDAT") %}
+            <a class="delete mp-5 ml-2" href="/candidat/modifierformation/{{formation.id}}"  style="color: #4caf50; font-size:24px; margin-top:2%"><i style="cursor: pointer;" class="fas fa-edit"></i></a>
+            &nbsp
+            <a class="delete mp-5 ml-2" href="/candidat/deleteformation/{{formation.id}}"  style="color: #4caf50; font-size:24px; margin-top:2%"><i style="cursor: pointer;" class="fas fa-trash"></i></a>
+        
+        {% endif %}
+        {% endfor %}
+    </section>
+    
+    <section >
+        <h2>Compétences</h2>
+        {% if is_granted("ROLE_CANDIDAT") %}
+            <a class="delete mp-5 ml-2" href="/candidat/ajouterpro/"  style="color: #4caf50; font-size:24px; margin-top:2%"><i style="cursor: pointer;" class="fas fa-plus"></i></a>
+        {% endif %}
+        <h3 class="h3gauche">Professionnelles</h3>
+        {% for professionnelle in user.candidat.professionelles %}
+            <div class="comp">
+                <p style="margin-left: 4%">{{ professionnelle.nom }}</p>
+            </div>
+        {% if is_granted("ROLE_CANDIDAT") %}
+            <a class="delete mp-5 ml-2" href="/candidat/modifierpro/{{professionnelle.id}}"  style="color: #4caf50; font-size:20px; margin-top:2%"><i style="cursor: pointer;" class="fas fa-edit"></i></a>
+            &nbsp
+            <a class="delete mp-5 ml-2" href="/candidat/deletepro/{{professionnelle.id}}"  style="color: #4caf50; font-size:20px; margin-top:2%"><i style="cursor: pointer;" class="fas fa-trash"></i></a>
+        
+        {% endif %}
+        {% endfor %}
+ 
+
+        <h3 class="h3gauche">Personnelles</h3>
+                 {% if is_granted("ROLE_CANDIDAT") %}
+            <a class="delete mp-5 ml-2" href="/candidat/ajouterpers/"  style="color: #4caf50; font-size:24px; margin-top:2%"><i style="cursor: pointer;" class="fas fa-plus"></i></a>
+        {% endif %}
+        {% for personelles in user.candidat.personelles %}
+        <div class="comp2">
+            <p style="margin-left: 4%">{{ personelles.nom }}</p>
+ 
+        </div>
+        {% if is_granted("ROLE_CANDIDAT") %}
+             <a class="delete mp-5 ml-2" href="/candidat/modifierpers/{{personelles.id}}"  style="color: #4caf50; font-size:20px; margin-top:2%"><i style="cursor: pointer;" class="fas fa-edit"></i></a>
+            &nbsp
+            <a class="delete mp-5 ml-2" href="/candidat/deletepers/{{personelles.id}}"  style="color: #4caf50; font-size:20px; margin-top:2%"><i style="cursor: pointer;" class="fas fa-trash"></i></a>
+        {% endif %}
+        {% endfor %}
+    </section>
+    
+    <section>
+           
+
+        <h2 >Centres d'intérêt</h2>
+                    {% if is_granted("ROLE_CANDIDAT") %}
+            <a class="delete mp-5 ml-2" href="/candidat/ajoutecentre/"  style="color: #4caf50; font-size:29px; margin-top:2%"><i style="cursor: pointer;" class="fas fa-plus"></i></a>
+        {% endif %}
+        {% for centerInreret in user.candidat.centerInrerets %}
+            <figure class="interet">
+                <figcaption>{{ centerInreret.nom }}</figcaption>
+                {% if is_granted("ROLE_CANDIDAT") %}
+                        <a class="delete mp-5 ml-2" href="/candidat/modifiecentre/{{centerInreret.id}}"  style="color: #4caf50; font-size:20px; margin-top:2%"><i style="cursor: pointer;" class="fas fa-edit"></i></a>
+                
+                <a class="delete mp-5 ml-2" href="/candidat/deletecentre/{{centerInreret.id}}"  style="color: #4caf50; font-size:20px; margin-top:2%"><i style="cursor: pointer;" class="fas fa-trash"></i></a>
+                {% endif %}
+            </figure>
+        {% endfor %}
+    </section>
+    
+{% endblock %}

@@ -1,0 +1,112 @@
+{% extends 'AdminBase.html.twig' %}
+
+{% block title %}Admin!{% endblock %}
+
+{% block body %}
+<section class="content" style="margin-top: 3%">
+    <div class="row">
+        <div class="col-lg-12">
+      <!-- /.card -->
+            <div class="card" >
+                <div class="card-header" style="font-family: 'Frijole', cursive;">
+                    <h3 class="card-title"><b>Candidats Table</b></h3>
+                </div>
+				<div class="card-body" >
+                
+				
+					    <!-- /.box-title -->
+
+					    <!-- /.dropdown js__dropdown -->
+                    <table id="example" class="table table-bordered table-striped display" style="width:100%" >
+                        <thead style="color: #0c890c; ;">
+                            <tr>
+                                <th>Id</th>
+                                <th>nom</th>
+                                <th>Prénom</th>
+                                <th>Email</th>
+                                <th>Decription</th>
+                                <th>Adrresse</th>
+                                <th>Telephone</th>
+                                <th>Nombre de postulation autorisée</th>
+                                <th>actions</th>
+                                
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Id</th>
+                                <th>nom</th>
+                                <th>Prénom</th>
+                                <th>Email</th>
+                                <th>Decription</th>
+                                <th>Adrresse</th>
+                                <th>Telephone</th>
+                                <th>Nombre de postulation autorisée</th>
+                                <th>actions</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            {% for candidat in candidats %}
+                                <tr>
+                                    <td>{{ candidat.id }}</td>
+                                    <td>{{ candidat.nom}}</td>
+                                    <td>{{ candidat.prenom}}</td>
+                                    <td>{{ candidat.email }}</td>
+                                    <td>{{ candidat.candidat.quijesuis}}</td>
+                                    <td>{{ candidat.candidat.adresse|default('') }}</td>
+                                    <td>{{ candidat.candidat.telephone|default('') }}</td>
+                                    <td> 
+                                    <a class="delete" data-toggle="modal" data-target="#exampleModal"  style="color: #E34724; margin-left: 45%"><i class="fa fa-plus-square" style="cursor: pointer; font-size: 20px" aria-hidden="true"></i></a>
+
+                                            <div class="modal fade mt-5 pt-5" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                    </div>
+                                                    <form action="{{ path('candidat_addnb', {'id': candidat.id}) }}" method="post">
+                                                    <div class="modal-body">
+                                                        <label for="birthdaytime">Fixer le nombre de postulation </label>
+                                                    
+                                                        <input type="number"  name="nb"  min="0" value="{{ candidat.candidat.nbpostulationautorisee }}">
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                                    </div>
+                                                    </form>
+                                                </div>
+                                                </div>
+                                            </div>
+                                        </td> 
+                                    <td>
+                                    <a class="delete ml-2" href="/admin/deletecandidat/{{candidat.id}}"  style="color: #E34724;"><i style="cursor: pointer;" class="material-icons">&#xE872;</i></a>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="10">no records found</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+			</div>
+		</div>
+    </div>
+    {% for message in app.flashes('suprimée') %}
+        <center><div class="col-9 alert alert-success">
+            {{ message }}
+        </div></center>
+    {% endfor %}
+    {% for message in app.flashes('error') %}
+        <div class="col-9 alert alert-danger"  >
+            {{ message }}
+        </div>
+    {% endfor %}
+    
+</section>
+{% endblock %}

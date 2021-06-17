@@ -1,0 +1,96 @@
+{% extends 'AdminBase.html.twig' %}
+
+{% block title %}Employée!{% endblock %}
+
+{% block body %}
+<section class="content" style="margin-top: 3%">
+    <div class="row">
+        <div class="col-lg-12">
+      <!-- /.card -->
+            <div class="card" >
+                <div class="card-header" style="font-family: 'Frijole', cursive;">
+                    <h3 class="card-title"><b>Recruteur Table</b></h3>
+                     <a class="fancy-button bg-gradient2 float-right" style="margin-top: -35px; color: #0c890c;" href="/admin/newRecruteur"
+                        style="color: #0C893A ;">
+                        <span>
+                        <i class="fa fa-plus modal-title"></i><b style="cursor: pointer;">Add New Employée</b></span></a>
+                
+                </div>
+				<div class="card-body" >
+                
+				
+					    <!-- /.box-title -->
+
+					    <!-- /.dropdown js__dropdown -->
+                    <table id="example" class="table table-bordered table-striped display" style="width:100%" >
+                        <thead style="color: #0c890c; ;">
+                            <tr>
+                                <th>Id</th>
+                                <th>CIN</th>
+                                <th>Nom</th>
+                                <th>Prénom</th>
+                                <th>Email</th>
+                                <th>Sexe</th>
+                                <th>Telephone</th>
+                                <th>Responsabilitée</th>
+                                <th>Date Début</th>
+                                <th>actions</th>
+                                
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Id</th>
+                                <th>CIN</th>
+                                <th>Nom</th>
+                                <th>Prénom</th>
+                                <th>Email</th>
+                                <th>Sexe</th>
+                                <th>Telephone</th>
+                                <th>Responsabilitée</th>
+                                <th>Date Début</th>
+                                <th>actions</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            {% for recruteur in recruteurs %}
+                                <tr>
+                                    <td>{{ recruteur.id }}</td>
+                                    <td>{{ recruteur.recruteur.cin }}</td>
+                                    <td>{{ recruteur.nom}}</td>
+                                    <td>{{ recruteur.prenom}}</td>
+                                    <td>{{ recruteur.email }}</td>
+                                    <td>{{ recruteur.recruteur.sexe }}</td>
+                                    <td>{{ recruteur.recruteur.telephone }}</td>
+                                    <td>{{ recruteur.recruteur.responsabilite }}</td>
+                                    <td>{{ recruteur.dateofajout|date('d-m-Y') }}</td>
+
+                                    <td>
+                                        <a class="delete ml-2" href="/admin/showrecruteur/{{recruteur.id}}"  style="color: #4caf50;"><i style="cursor: pointer;" class="material-icons">&#xE254;</i></a>
+                                        <a class="delete ml-2" href="/admin/deleterecruteur/{{recruteur.id}}"  style="color: #E34724;"><i style="cursor: pointer;" class="material-icons">&#xE872;</i></a>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td class="text-center" colspan="10">no records found</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+			</div>
+		</div>
+    </div>
+    {% for message in app.flashes('suprimée') %}
+        <center><div class="col-9 alert alert-success">
+            {{ message }}
+        </div></center>
+    {% endfor %}
+    {% for message in app.flashes('error') %}
+        <div class="col-9 alert alert-danger"  >
+            {{ message }}
+        </div>
+    {% endfor %}
+    
+</section>
+{% endblock %}

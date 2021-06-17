@@ -1,0 +1,69 @@
+{% extends 'loginAdminBase.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+<div id="single-wrapper">
+    <form method="post" class="frm-single">
+        <div class="inside"  style="margin-top: 50%">
+
+
+       <!-- {% if app.user %}
+            <div class="mb-3">
+                You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+            </div>
+        {% endif %}-->
+        <div class="title"><strong>Admin</strong></div>
+        <div class="frm-title">Login</div>
+    
+        
+        
+        <div class="frm-input"><input type="email" class="frm-inp" value="{{ last_username }}" name="email" id="inputEmail" placeholder="Enter your email"  required autofocus><i class="fa fa-envelope frm-ico"></i></div>
+        
+        <div class="frm-input"><input type="password" class="frm-inp" name="password" id="inputPassword" placeholder="Enter your password"  required><i class="fa fa-lock frm-ico"></i></div>
+        {% if error %}
+            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+        <input type="hidden" name="_csrf_token"
+            value="{{ csrf_token('authenticate') }}"
+        >
+
+        <div class="clearfix margin-bottom-20">
+				<div class="float-left">
+					<div class="checkbox primary"><input type="checkbox" id="rememberme"><label for="rememberme">Remember me</label></div>
+					<!-- /.checkbox -->
+				</div>
+				<!-- /.float-left -->
+				<div class="float-right"><a href="page-recoverpw.html" class="a-link"><i class="fa fa-unlock-alt"></i>Forgot password?</a></div>
+				<!-- /.float-right -->
+		</div>
+
+        {#
+            Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+            See https://symfony.com/doc/current/security/remember_me.html
+
+            <div class="checkbox mb-3">
+                <label>
+                    <input type="checkbox" name="_remember_me"> Remember me
+                </label>
+            </div>
+        #}
+        <button type="submit" class="frm-submit">Login<i class="fa fa-arrow-circle-right"></i></button>
+        
+
+        <div class="row small-spacing">
+				<div class="col-md-12">
+					<div class="txt-login-with txt-center">or login with</div>
+					<!-- /.txt-login-with -->
+				</div>
+				<!-- /.col-md-12 -->
+				<div class="col-md-6"><button type="button" class="btn btn-sm btn-icon btn-icon-left btn-social-with-text btn-facebook text-white waves-effect waves-light"><i class="ico fab fa-facebook"></i><span>Facebook</span></button></div>
+				<!-- /.col-md-6 -->
+				<div class="col-md-6"><button type="button" class="btn btn-sm btn-icon btn-icon-left btn-social-with-text btn-google-plus text-white waves-effect waves-light"><i class="ico fab fa-google-plus"></i>Google+</button></div>
+				<!-- /.col-md-6 -->
+		</div>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

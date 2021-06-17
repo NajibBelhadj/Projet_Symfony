@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {# Run `composer require symfony/webpack-encore-bundle`
+           and uncomment the following Encore helpers to start using Symfony UX #}
+        {% block stylesheets %}
+            {#{{ encore_entry_link_tags('app') }}#}
+            <link rel="stylesheet" href={{ asset("candidats.css") }}>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+ <link rel="preconnect" href="https://fonts.gstatic.com">
+            <link href="https://fonts.googleapis.com/css2?family=Akaya+Telivigala&display=swap" rel="stylesheet">
+            <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
+            <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans">
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
+
+            <link rel="stylesheet" href={{ asset("header.css") }}>
+
+
+              <link rel="stylesheet" href={{ asset("plugins/fontawesome-free/css/all.min.css") }}>
+                <!-- Ionicons -->
+                <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+                <!-- DataTables -->
+                <link rel="stylesheet" href={{ asset("plugins/datatables-bs4/css/dataTables.bootstrap4.min.css") }}>
+                <link rel="stylesheet" href={{ asset("plugins/datatables-responsive/css/responsive.bootstrap4.min.css") }}>
+                <!-- Theme style -->
+                <link rel="stylesheet" href={{ asset("dist/css/adminlte.min.css") }}>
+                <!-- Google Font: Source Sans Pro -->
+                <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+        
+        {% endblock %}
+
+        {% block javascripts %}
+      
+            {#{{ encore_entry_script_tags('app') }}#}
+            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+        {% endblock %}
+    </head>
+    <body>
+        <section class="main body">
+        <!--navigation-->
+        <nav>
+            <!--logo-->
+
+            <label class="menu-icon" for="menu-btn">
+                <span class="nav-icon"></span>
+            </label>
+           
+            <ul class="menu">
+                <li><a [routerLink]='[""]'>Acceuil</a></li>
+                <li><a href="/recruteur/categorie/all" >Categorie</a></li>
+                <li><a href="/recruteur/offre">offre d'emploi</a></li>
+                <li><a href="/all/candidats">Candidats</a></li>
+                <li><a href="/logout">logout</a></li>
+            </ul>
+        </nav>
+        <!--main-content-->
+        <div >
+            <router-outlet></router-outlet>
+             <!--text-->
+        </div>
+    </section>
+        {% block body %}{% endblock %}
+
+
+        {% block javascript_footer %}
+      
+            {#{{ encore_entry_script_tags('app') }}#}
+                        <script>
+                    $('#myModal').on('shown.bs.modal', function () {
+                    $('#myInput').trigger('focus')
+                    })
+            </script>
+
+        {% endblock %}
+    </body>
+</html>

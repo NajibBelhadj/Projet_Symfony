@@ -1,0 +1,46 @@
+{% extends 'baseHome.html.twig' %}
+
+{% block title %}Candidateur{% endblock %}
+
+{% block body %}
+
+
+<div class="container col-6" style="margin-top: 3%">
+
+    {% for cand in candidateur %}
+            <div class="card" style="margin-top: 3%">
+            <div class="card-header">
+                {{ cand.offre.nom }}
+            </div>
+            <div class="card-body" >
+                <h5 class="card-title">{{ cand.offre.description }}</h5>
+                <h5 class="card-title">Catégorie :{{ cand.offre.categorie }} </h5>
+            {% if cand.validation is null %}
+                    <p style="margin-left: 40%; margin-top: 2%">Demande en cour de traitement</p>
+             {% elseif cand.validation == false %}
+                <div class="bg-danger color-palette" style="height: 35px; background-color: #d9534f; border-color: #d43f3a; color: #fff; width: 330px; margin-left: 40%">
+                <span style="font-size: 20px; margin-left:7%;">Votre Candidature a été refusée </span></div>
+           
+            {% elseif cand.validation == true %}
+            <div>
+                <div class="bg-danger color-palette" style="height: 35px; background-color: #57d53b;  color: #fff; width: 335px; margin-left: 40%">
+                <span style="font-size: 20px; margin-left:7%;">Votre Candidature a été acceptée</span>
+     
+                </div>
+                           <p style="margin-left: 27%; margin-top: 2%">  Nous tenons à vous informer que nous avons fixé la date de rendez-vous
+                        le {{ cand.daterdz|date("d/m/Y") }} à {{ cand.daterdz|date("H:i") }}</p>
+            </div>
+
+            {% endif %}
+
+            </div>
+            </div>
+    {% else %}
+        <div>no records found</div>
+    {% endfor %}
+    <div>
+    <br>
+    <br>
+    <br>
+    <br>
+{% endblock %}

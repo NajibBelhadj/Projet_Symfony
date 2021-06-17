@@ -1,0 +1,46 @@
+{% extends 'baseHome.html.twig' %}
+
+{% block title %}trouver un offre{% endblock %}
+
+{% block body %}
+
+
+<div class="container col-6" style="margin-top: 3%">
+
+    {% for offre in offres %}
+            <div class="card" style="margin-top: 3%">
+            <div class="card-header">
+                {{ offre.nom }}
+            </div>
+            <div class="card-body" >
+                <h5 class="card-title">{{ offre.description }}</h5>
+                <h5 class="card-title">Catégorie :{{ offre.categorie }} </h5>
+                <a href="/candidat/postul/{{ offre.id }}" class="btn btn-primary" style="margin-left: 83%">Postuler</a>
+
+            </div>
+            </div>
+
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success"  >
+                    {{ message }}
+                </div>
+            {% endfor %}
+            {% for message in app.flashes('error') %}
+                <div class="alert alert-danger"  >
+                    {{ message }}
+                </div>
+            {% endfor %}
+            {% for message in app.flashes('err') %}
+                <div class="alert alert-danger"  >
+                    {{ message }}
+                </div>
+            {% endfor %}
+    {% else %}
+        <div>no records found</div>
+    {% endfor %}
+    <div>
+    <br>
+    <br>
+    <br>
+    <br>
+{% endblock %}

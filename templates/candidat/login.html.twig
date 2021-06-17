@@ -1,0 +1,81 @@
+{% extends 'authbaseC.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+ <div class="container">
+      <div class="forms-container">
+        <div class="signin-signup">
+            <form method="post" class="sign-in-form">
+                <h2 class="title">Sign in</h2>
+                {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+
+                {% if app.user %}
+                    <div class="mb-3">
+                        You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+                    </div>
+                {% endif %}
+
+                
+                <div class="input-field"><i class="fas fa-user"></i><input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" placeholder="Votre Email" required autofocus></div>
+                
+                            
+            <div class="input-field"><i class="fas fa-lock"></i><input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" placeholder="Password" required></div>
+
+                <input type="hidden" name="_csrf_token"
+                    value="{{ csrf_token('authenticate') }}"
+                >
+
+                {#
+                    Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+                    See https://symfony.com/doc/current/security/remember_me.html
+
+                    <div class="checkbox mb-3">
+                        <label>
+                            <input type="checkbox" name="_remember_me"> Remember me
+                        </label>
+                    </div>
+                #}
+
+                <button class="btn solid" type="submit">
+                    Sign in
+                </button>
+                            <p class="social-text">Or Sign in with social platforms</p>
+            <div class="social-media">
+              <a href="#" class="social-icon">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="#" class="social-icon">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a href="#" class="social-icon">
+                <i class="fab fa-google"></i>
+              </a>
+              <a href="#" class="social-icon">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+            </div>
+          </form>
+          
+        </div>
+      </div>
+
+      <div class="panels-container">
+        <div class="panel left-panel">
+          <div class="content">
+
+            <a href="/register"><button style="margin-left: -350%" class="btn transparent" id="sign-up-btn">
+              Sign up
+            </button></a>
+          </div>
+          <img src={{ asset("img/log.svg") }} class="image" alt="" />
+        </div>
+
+      </div>
+    </div>
+            </form>
+{% endblock %}
+
+        

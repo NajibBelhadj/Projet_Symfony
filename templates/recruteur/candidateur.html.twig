@@ -1,0 +1,104 @@
+{% extends 'candidatsbase.html.twig' %}
+
+{% block title %}Candidateur{% endblock %}
+
+{% block body %}
+{% for cond in conds %}
+<div class="container col-6">
+  <div class="row main-row">
+    <div class="col-lg-4 col-md-12 col-sm-12">
+      <div class="blog-img "  >
+        <img style="margin-bottom: -130%; margin-left: 10%" src="/uploads{{ asset(cond.candidat.candidat.image) }}" alt="" class="img-fluid">
+      </div>
+    </div>
+    <div class="col-lg-8 col-md-12 col-sm-12">
+    <div class="blog-title">
+    <h3>
+      <i class="fa fa-users"></i>
+      {{ cond.candidat.nom }} {{ cond.candidat.prenom }}</h3>   
+  </div>
+  <div class="blog-date">
+      <span>{{ cond.candidat.email }}</span>
+  </div>
+      <hr>
+      <div class="blog-desc">
+        <p>
+          <i aria-hidden="true" class="fa fa-phone"></i> {{ cond.candidat.candidat.telephone }} <br><hr>
+          <i class="fas fa-map-marker-alt"></i> {{ cond.candidat.candidat.adresse }} <br><hr>
+          <i class="fa fa-file-text"></i> {{ cond.candidat.candidat.quijesuis }}
+        </p>
+      </div>
+      <div class="blog-button">
+       <a href="/cv/{{ cond.candidat.id }}"><button class="btn1 btn1-outline-dark">Consulter Profile</button></a>
+      </div>
+
+      <div class="blog-button">
+       {% if cond.validation is null %}
+        <a href="/recruteur/refus/{{ cond.id }}"><button class="btn1 btn1-outline-dark" style="background-color: #f00020; color: #fff; width: 150px; margin-left: 15%">Refuser</button></a>
+       <button class="btn1 btn1-outline-dark ml-3" style="background-color: #57d53b; color: #fff; width: 150px" data-toggle="modal" data-target="#exampleModal">Accepter</button>
+
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <form method="post">
+                  <div class="modal-body">
+                    <label for="birthdaytime">Fixer date de rendez-vous</label>
+                    <input type="datetime-local" id="birthdaytime" name="date" required>
+                    <input type="number" style="display: none" id="birthdaytime" name="name" value="{{ cond.id }}">
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        
+
+        {% elseif cond.validation == false %}
+          <h3 style="margin-left: 35%; color: #555B61"> Refusé </h3>
+
+        {% elseif cond.validation == true %}
+          <p style="margin-left: 17%; color: #555B61"> rendez-vous fixer le {{ cond.daterdz|date("d/m/Y") }} à {{ cond.daterdz|date("H:i") }} </p>
+         <a href="/recruteur/refus/{{ cond.id }}"><button class="btn1 btn1-outline-dark" style="background-color: #f00020; color: #fff; width: 150px; margin-left: 15%">Annuler</button></a>
+       <button class="btn1 btn1-outline-dark ml-3" style="background-color: #57d53b; color: #fff; width: 150px" data-toggle="modal" data-target="#exampleModal">Modifier</button>
+
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <form method="post">
+                  <div class="modal-body">
+                    <label for="birthdaytime">Fixer date de rendez-vous</label>
+                    <input type="datetime-local" id="birthdaytime" name="date" required>
+                    <input type="number" style="display: none" id="birthdaytime" name="name" value="{{ cond.id }}">
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+{% endfor %}
+{% endblock %}

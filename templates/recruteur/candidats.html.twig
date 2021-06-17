@@ -1,0 +1,43 @@
+{% extends 'candidatsbase.html.twig' %}
+
+{% block title %}All Candidat{% endblock %}
+
+{% block body %}
+{% for candidat in candidats %}
+<div class="container col-6">
+  <div class="row main-row">
+    <div class="col-lg-4 col-md-12 col-sm-12">
+      <div class="blog-img "  >
+        <img style="margin-bottom: -130%; margin-left: 10%" src="/uploads{{ asset(candidat.candidat.image) }}" alt="" class="img-fluid">
+      </div>
+    </div>
+    <div class="col-lg-8 col-md-12 col-sm-12">
+      <div class="blog-title">
+        <h3>
+          <i class="fa fa-users"></i>
+          {{ candidat.nom }} {{ candidat.prenom }}</h3>
+
+          
+      </div>
+      <div class="blog-date">
+        <span>{{ candidat.email }}</span>
+      </div>
+      <hr>
+      <div class="blog-desc">
+        <p>
+          <i aria-hidden="true" class="fa fa-phone"></i> {{ candidat.candidat.telephone }} <br><hr>
+          <i class="fas fa-map-marker-alt"></i> {{ candidat.candidat.adresse }} <br><hr>
+          <i class="fa fa-file-text"></i> {{ candidat.candidat.quijesuis }}
+        </p>
+      </div>
+      <div class="blog-button">
+       <a href="/cv/{{ candidat.id }}"><button class="btn1 btn1-outline-dark">Consulter Profile</button></a>
+      </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+{% endfor %}
+{% endblock %}
